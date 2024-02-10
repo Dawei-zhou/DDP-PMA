@@ -1,0 +1,305 @@
+<!--
+ html from:https://github.com/orion-orion/Takeaways-Order-Sys
+-->  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!--HTML4.01-->
+	<!-- <meta htt-equiv='Content-Type' content='text/html'  charset="UTF-8"> -->
+	<!--HTML5-->
+	<meta charset="UTF-8" />
+	<meta name='viewport' content="width=device-width,initial-scale=1,user-scalable=no" />
+	<title>My cart</title>
+	<link href="static/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<div class='main'>
+		<div class="site-nav">
+			<div class="nav">
+				<ul class="nav-left">
+					<li><a class='nav-hangon'>Cart</a></li>
+				</ul>
+				<ul class="nav-right">
+
+
+					<li class='nav_sellCenter'>
+						<a href="personal" class='nav-sellCenter'>Profile</a>
+						<ul class="nav-myTao-nav">
+							<li><a href="ModifyPersonalInfo">Modify profile</a></li>
+							<li><a href="ModifyPassword">Change password</a></li>
+							<li><a href="OrderPage">My orders</a></li>
+							<li><a href="MyComments">My comments</a></li>
+							<li><a href="WriteComments">Write comments</a></li>
+						</ul>
+					</li>
+					<li><a href="UserRestList" class='nav-index'>Restaurant</a></li>
+					<li><a href="index" class='nav-index'>Log out </a></li>
+
+				</ul>
+			</div>
+		</div>
+		<div class="container">
+			<div class="header">
+				<div class="header-search">
+					<input type="text" placeholder="Please enter content" class='header-search-input' autocomplete="off"><!--
+					--><button type='submit'>Search</button>
+					<div class="list">
+					</div>
+				</div>
+			</div>
+			<div class="content">
+				<div class="tbBar">
+					<ul class = 'switch-cart'>
+						<li class='btn-switch-cart switch-cart-0 selectColumn'>
+							<a href="#" class='btn-switch-href '>
+								<em>All items</em>
+								<span class='number'>7</span>
+								<span class='pipe'></span>
+							</a>
+						</li>
+					</ul>
+					<div class="cart-sum">
+						<span>Selected items</span>
+						<strong class='price'>￥<!--
+							--><span class='total-symbol'>0.00</span>
+						</strong>
+						<button onclick="confirm()" class="submit-btn btn-common">Proceed</button>
+					</div>
+					<div class="wrap-line">
+					</div>
+				</div>
+				<div class="tbMain">
+					<div class="commodityColumn">
+						<div class="th-chk">
+							<div id="selectAll" class="selectAll ">
+								<input type="checkbox" name="selectAllChckbox" id='selectAllChckbox' class='allSelected1' autocomplete="off">
+								<label for="selectAllChckbox">Select all</label>
+							</div>
+						</div>
+						<div class="th-inner">
+							<div class="commodityMsg">
+								<div>Item info</div>
+							</div>
+						</div>
+						<div class="th-space">
+							<div class="td-inner">&nbsp;</div>
+						</div>
+						<div class="th-price">
+							<div class="td-inner">Price per item</div>
+						</div>
+						<div class="th-amount">
+							<div class="td-inner">Quantity</div>
+						</div>
+						<div class="th-sum">
+							<div class="td-inner">Total price</div>
+						</div>
+						<div class="th-operation">
+							<div class="td-inner">Operation</div>
+						</div>
+					</div>
+					<div class='commodityContainer'>
+
+						{% if messages == "done" %}
+		                    {% for item in result %}
+							<div class="mainCommodity">
+								<div class="commodityInfo">
+									<ul>
+										<li class='td-chk'>
+											<div class="td-inner">
+												<input type="checkbox" name='checkbox' autocomplete="off" >
+											</div>
+										</li>
+										<li class='td-item'>
+											<div class="td-inner">
+												<a href="{{item[4]}}"  class='res'>
+												</a>
+												<div class="item-info">
+													<div class="item-basis-info">
+														<a>{{ item[2] }}</a>
+													</div>
+													<div class="item-other-info">
+														<div class="item-other-space"></div>
+														<div class="item-other-list">
+															<a href="#" title='支持信用卡支付'>
+																<div class="bandCard"></div>
+															</a>
+															<a href="#" title='消费者保障服务'>
+																<div class="guarantee"></div>
+															</a>
+														</div>
+													</div>
+												</div>
+											</div>
+										</li>
+										<li class='td-info'>
+											<div class="td-info-msg">
+												<p>Restaurant：{{ item[1] }}</p>
+											</div>
+										</li>
+										<li class='td-price'>
+											<div class="td-inner">
+												<p class='discount'>￥{{ item[3] }}</p>
+											</div>
+										</li>
+										<li class='td-amount'>
+											<div class="item-amount">
+												<a href="#" class='amount-left amount-color'>-</a>
+												<input type="text" name='amountNum' value='1' autocomplete="off">
+												<a href="#" class="amount-right">+</a>
+											</div>
+											<div class="stock">
+												574
+											</div>
+											<div class="outNum">
+												<span class="instr">Maximum purchase quantity</span>
+												<span class='stockNum'></span><!--
+												--><em>件</em>
+											</div>
+
+										</li>
+										<li class='td-sum'>
+											<em>￥</em><!--
+											--><span>{{ item[3] }}</span>
+										</li>
+										<li class='td-operation'>
+											<p><a href="#" class='delete'>Delete</a></p>
+										</li>
+									</ul>
+								</div>
+							</div>
+						{% endfor %}
+						{% endif %}
+						<div class="mainCommodity">
+							<div class="commodityInfo">
+								<ul>
+									<li class='td-chk'>
+										<div class="td-inner">
+											<input type="checkbox" name='checkbox' autocomplete="off">
+										</div>
+									</li>
+									<li class='td-item'>
+										<div class="td-inner">
+											<div class="item-info">
+												<div class="item-basis-info">
+													<a href="#">
+														Beef noodle
+													</a>
+												</div>
+												<div class="item-other-info">
+													<div class="item-other-space"></div>
+													<div class="item-other-list">
+														<a href="#" title='支持信用卡支付'>
+															<div class="bandCard"></div>
+														</a>
+														<a href="#" title='消费者保障服务'>
+															<div class="guarantee"></div>
+														</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</li>
+									<li class='td-info'>
+										<div class="td-info-msg">
+											<p>Restaurant：IMC </p>
+										</div>
+									</li>
+									<li class='td-price'>
+										<div class="td-inner">
+											<p class='non-discount'>￥15.00</p>
+											<p class='discount'>￥<span>13.00</span></p>
+											<div class="promotion">
+												Restaurant discount
+												<i class='promotionIcon'></i>
+											</div>
+											<div class="proSlidedown">
+												<p class='newPro'>Discount：For new item</p>
+												<p>Coupon：￥2.00</p>
+											</div>
+										</div>
+									</li>
+									<li class='td-amount'>
+										<div class="item-amount">
+											<a href="#" class='amount-left amount-color'>-</a>
+											<input type="text" name='amountNum' value='1' autocomplete="off">
+											<a href="#" class="amount-right">+</a>
+										</div>
+										<div class="stock">
+											915
+										</div>
+										<div class="outNum">
+											<span class="instr">Maximum purchase quantity</span>
+											<span class='stockNum'></span>
+											<em>items</em>
+										</div>
+		 							</li>
+									<li class='td-sum'>
+										<em>￥</em><span>13.00</span>
+									</li>
+									<li class='td-operation'>
+										<p><a href="#" class='delete'>Delete</a></p>
+									</li>
+								</ul>
+							</div>
+						</div> 
+					</div>
+				</div>
+			</div>
+			<div class="col-md-12" style="font-size: 14px; float: right;">
+				<label for="activities">Select Type</label><span style="margin-left: 30px; font-size: 14px;"></span>
+				<input type="radio" name="mode" value="1" />On-site
+				<input type="radio" name="mode" value="0" />Takeaway
+				<br>
+			</div>
+			<div class="footer">
+				<div class="all-selected">
+					<input type="checkbox" name='all-selected' id='all-selected' class='allSelected2' autocomplete="off">
+					<label for="all-selected">Select all</label>
+				</div>
+				<div class="operation">
+					<a href="#" class='delete'>Delete</a>
+				</div>
+				<div class="float-bar-right">
+					<div class="amount-sum">
+						<span>Selected items</span>
+						<em class='totalSum'>0</em>
+						<span>items</span>
+					</div>
+					<div class="price-sum">
+						<span>Total price</span>
+						<span class='moneySym'>￥</span><!--
+						--><em class='total-sum'>0.00</em>
+					</div>
+					<div class="btn-area">
+						<!-- <a href="#" class='btn-common' id='btn-sum'>结 算</a> -->
+							<!-- <a onclick="confirm()" class="btn-common" id='btn-sum'>结  算</a> -->
+						<input type="submit" name="action" value="Submit" class='btn-common' id='btn-sum' onclick="confirm()" style="border: none; width: 90px; height: 52px; color: white; font-size: 18px;">
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<script src='static/js/jquery-2.2.1.min.js'></script>
+	<script src='static/js/template.js'></script>
+	<script id='delete' type='text/html'>
+		<div class="undo-wrapper">
+			<div class="deleteCom">
+				<p>
+					Successfully deleted
+					<em>1</em>
+					items，if want to keep it， you could
+					<a href="#" class='turnBack'>undo this deletion</a>
+				</p>
+			</div>
+		</div>
+	</script>
+	<script>
+		function confirm() {
+			alert('Order comfirmed!');
+		}
+	</script>
+	<script src='static/js/myOrder.js'></script>
+</body>
+</html>
